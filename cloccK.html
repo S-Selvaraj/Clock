@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Digital Clock</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .clock-container {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      min-width: 300px;
+      max-width: 90%;
+    }
+
+    .time {
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <div class="time" id="clock">00:00:00</div>
+    <div class="date" id="date">Loading...</div>
+  </div>
+
+  <script>
+    const clock = document.getElementById('clock');
+    const date = document.getElementById('date');
+
+    function updateClock() {
+      const now = new Date();
+
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      const timeStr = `${hours}:${minutes}:${seconds}`;
+      clock.textContent = timeStr;
+
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      date.textContent = now.toLocaleDateString('en-US', options);
+    }
+
+    updateClock(); // initial call
+    setInterval(updateClock, 1000); // update every second
+  </script>
+</body>
+</html>
